@@ -1,0 +1,18 @@
+Now mjs will be standardiesd.
+but we will be learning cjs as in idustries they are using cjs.
+
+
+to use mjs make package.json and 
+{
+  "type": "module"
+}
+
+
+//-----------------------------------------------------------------------
+module.export is also empty object and many use it as 
+module.exports.x = x;
+module.exports.sum = sum;
+module.exports.sub = sub;
+
+and while importing use it as 
+//const mod = require("./sum.js");
