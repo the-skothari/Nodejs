@@ -3,3 +3,7 @@ Install mongoDB compass.
 
 CRUD operations:-
   
+
+Nodemon
+  nodemon ./src/app.js
+  
