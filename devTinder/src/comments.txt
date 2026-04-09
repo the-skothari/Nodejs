@@ -1,2 +1,3 @@
 Need to create a server.
 
+app.use("/", (err, req, res, next)=>{}); default format.

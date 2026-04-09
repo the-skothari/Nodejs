@@ -6,4 +6,39 @@ CRUD operations:-
 
 Nodemon
   nodemon ./src/app.js
-  
+
+
+//How to handle multiple route handlers.
+app.use(
+  "/user",
+  (req, res, next) => {
+    console.log("Handling the route user 1!!");
+    //res.send("1st Response");
+    next();
+  },
+  (req, res, next) => {
+    console.log("handling the router user 2!!");
+    res.send("2nd response");
+  },
+);
+//Only give first route handler.
+//two run the next req, res write next(); in the last of first. and also pass next param.
+//also note that first should not send anything other wise it will not work. Jab bhi next ayega wo dusre wale router handler me transfer ho jayega.
+
+
+
+Middle ware
+
+app.use("/admin", (req,res, next)=>{
+  const token = "xyz";
+  const admin = token === "xyz";
+  if(!admin){
+    res.status(401).send("Unauthorised Access.")
+  }else{
+    next();
+  }
+})
+
+//for getData.
+
+//for deleteData
