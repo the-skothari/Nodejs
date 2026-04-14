@@ -1,35 +1,32 @@
 const express = require("express");
-
+const connectDB = require("./config/database");
 const app = express();
+const User = require("./models/user");
 
-// app.use("/admin", (req, res, next) => {
-//   const token = "xyz";
-//   const admin = token === "xyz";
-//   if (!admin) {
-//     res.status(401).send("Unauthorised Access.");
-//   } else {
-//     next();
-//   }
-// });
+app.post("/signup", async (req, res) => {
+  //Creating a new instance of user model.
+  const user = new User({
+    firstName: "Saksham",
+    lastName: "Kothari",
+    gender: "Male",
+  });
 
-//for getData.
-
-//for deleteData
-
-app.get("/userData", (req, res) => {
-  //Logic to DB call.
-
-  throw new Error("Error");
-  res.send();
-});
-
-app.use("/", (err, req, res, next) => {
-  if (err) {
-    res.status(500).send("something went wrong.");
+  try {
+    await user.save();
+    //sending back the response.
+    res.send("User Added successfuly.");
+  } catch (err) {
+    res.status(400).send("Error saving the user: " + err.message);
   }
 });
 
-//Starting the server.
-app.listen(3000, () => {
-  console.log("Server is successfully listening on port 3000");
-}); //give port to host.
+connectDB()
+  .then(() => {
+    app.listen(7777, () => {
+      console.log("Database connected successfully.");
+      console.log("Server is successfully listning to 7777...");
+    });
+  })
+  .catch((err) => {
+    console.error("Database cannot be connected.");
+  });

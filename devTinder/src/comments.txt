@@ -1,3 +1,46 @@
 Need to create a server.
 
 app.use("/", (err, req, res, next)=>{}); default format.
+
+---------------------------------------------------------------------------------------------------------------------
+Episode - 6
+Connect to thr cluster.
+
+user schema.
+const mongoose = require("mongoose");
+
+const userSchema = new mongoose.Schema({
+  firstName : {
+    type : String
+  },
+  lastName : {
+    type : String 
+  },
+  emailID : {
+    type : String
+  },
+  gender :{
+    type : String
+  },
+  age : {
+    type : Number
+  }
+});
+
+module.exports =  mongoose.model("User", userSchema);
+
+Post api.
+app.post("/signup", async (req, res) => {
+  //Creating a new instance of user model.
+  const user = new User({
+    firstName: "Saksham",
+    lastName: "Kothari",
+    gender: "Male",
+  });
+
+  await user.save();
+  //sending back the response.
+  res.send("User Added successfuly.");
+});
+
+---------------------------------------------------------------------------------------------------------------------
